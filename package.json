@@ -1,0 +1,17 @@
+{
+  "name": "hello-extension-chrome",
+  "version": "1.0.0",
+  "description": "This sample demonstrates using the `chrome.windows` and `chrome.tabs` API to manage tabs across different windows.",
+  "main": "dist/background.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsc --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chrome": "^0.0.269",
+    "typescript": "^5.5.4"
+  }
+}
