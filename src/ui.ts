@@ -43,8 +43,6 @@
         color: '#ddd',
         textAlign: 'center',
         fontWeight: 'bold',
-        borderTopLeftRadius: '4px',
-        borderBottomLeftRadius: '4px',
         cursor: 'pointer',
       } satisfies Partial<CSSStyleDeclaration>
     )
