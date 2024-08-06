@@ -22,13 +22,24 @@ async function start() {
       const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
       if (!tabIdWindowIdMap[tab.id]) { return }
 
-      chrome.tabs.move(tab.id!, { windowId: tabIdWindowIdMap[tab.id], index: -1 })
-      chrome.tabs.update(
+      try {
+        await chrome.tabs.move(tab.id!, { windowId: tabIdWindowIdMap[tab.id], index: -1 })
+      } catch (error) {
+        console.log('原窗口可能被销毁，创建新窗口后尝试')
+        const { top, height, width, left } = await chrome.windows.get(tab.windowId)
+        await chrome.windows.create({
+          type: 'normal',
+          tabId: tab.id,
+          top, height, width, left,
+        })
+      }
+
+      delete tabIdWindowIdMap[tab.id]
+
+      await chrome.tabs.update(
         tab.id!,
         { active: true }
       )
-
-      delete tabIdWindowIdMap[tab.id]
 
       if (Object.keys(tabIdWindowIdMap).length === 0) {
         chrome.runtime.onMessage.removeListener(listener)
