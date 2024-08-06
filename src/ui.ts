@@ -17,6 +17,16 @@
     document.getElementById(styleId)?.remove()
   })
 
+  window.addEventListener('keydown', onKeydown)
+
+  function onKeydown(event) {
+    if (event.key === 'Escape') {
+      console.log('keydown esc')
+      chrome.runtime.sendMessage('reset')
+      window.removeEventListener('keydown', onKeydown)
+    }
+  }
+
   function createButton(id: string) {
     const container = document.createElement('div');
     const placeholder = document.createElement('div')

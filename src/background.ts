@@ -8,9 +8,11 @@ async function start() {
   const currentTab = tabs[0];
   tabIdWindowIdMap[currentTab.id] = currentTab.windowId
 
+  const { top, height, width, left } = await chrome.windows.get(currentTab.windowId)
   await chrome.windows.create({
     type: 'popup',
-    tabId: currentTab.id
+    tabId: currentTab.id,
+    top, left, height, width
   })
 
   if (!listener) {
