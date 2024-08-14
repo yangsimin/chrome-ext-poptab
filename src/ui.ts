@@ -1,21 +1,19 @@
 (() => {
-  const styleId = 'ext-style'
+  const styleId = 'ext-poptab-style'
 
+  console.log('add style')
   if (!document.getElementById(styleId)) {
     const style = createStyle(styleId)
     document.head.appendChild(style)
+
+    window.addEventListener('keydown', onKeydown)
   }
-
-  window.addEventListener('beforeunload', () => {
-    document.getElementById(styleId)?.remove()
-  })
-
-  window.removeEventListener('keydown', onKeydown)
-  window.addEventListener('keydown', onKeydown)
 
   function onKeydown(event) {
     if (event.key === 'Escape') {
       console.log('keydown esc')
+      event.preventDefault()
+      event.stopPropagation()
       chrome.runtime.sendMessage('reset')
       teardown()
     }

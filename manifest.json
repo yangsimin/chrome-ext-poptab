@@ -16,7 +16,8 @@
   "permissions": [
     "activeTab",
     "tabs",
-    "scripting"
+    "scripting",
+    "storage"
   ],
   "manifest_version": 3,
   "host_permissions": [
